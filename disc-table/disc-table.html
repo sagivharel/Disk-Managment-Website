@@ -1,0 +1,15 @@
+<h1>{{type}}</h1>
+
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <add-disc></add-disc>
+    </div>
+
+</div>
+
+<table ng-repeat="disc in discs">
+    <td>{{disc.id}}</td>
+    <td>{{disc.name}}</td>
+    <td>{{disc.date}}</td>
+    <td>{{disc.reason}}</td>
+</table>
