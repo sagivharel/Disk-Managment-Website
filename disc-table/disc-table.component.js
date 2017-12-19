@@ -4,30 +4,23 @@ angular
         templateUrl: 'disc-table/disc-table.html',
         controller: ['$scope', '$http', '$routeParams',
             function ($scope, $http, $routeParams) {
-                var type = $routeParams.type;
+                var type = $routeParams.type,
+                    getDiscs = function () {
+                        $http.get(`db-actions/get_discs.php?type=${type}`)
+                            .then(function (response) {
+                                $scope.discs = response.data.discs;
+                            });
+                    };
                 $scope.type = type;
-                $http.get(`db-actions/get_discs.php?type=${type}`)
-                    .then(function (response) {
-                        $scope.discs = response.data.discs;
-                    });
+                getDiscs();
 
-                // handle adding new disc
-                $scope.addDisc = function () {
-                    var request = $http({
-                        method: "post",
-                        url: "db-actions/adddisc.php",
-                        data: {
-                            name: $scope.discOwner,
-                            reason: $scope.discReason
-                        },
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    });
-                    request.then(function () {
-                        // actions after added successfully
-                    });
+                $scope.removeDisc = function (discId) {
+                    $http.delete(`db-actions/remove_disc.php?id=${discId}`)
+                        .then(response => {
+                            $scope.statusMsg = response.data;
+                            getDiscs();
+                        })
                 }
-            },
+            }
         ]
     })

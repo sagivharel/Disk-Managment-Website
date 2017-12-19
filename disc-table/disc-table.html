@@ -1,15 +1,32 @@
-<h1>{{type}}</h1>
-
-<div class="container" style="margin-top:50px;">
-    <div class="row">
-        <add-disc></add-disc>
-    </div>
-
+<div>
+    <h1 class="center-align">{{type | uppercase}}</h1>
 </div>
 
-<table ng-repeat="disc in discs">
-    <td>{{disc.id}}</td>
-    <td>{{disc.name}}</td>
-    <td>{{disc.date}}</td>
-    <td>{{disc.reason}}</td>
+<div class="container" style="margin-top:50px;">
+    <div class="row add-disc-form">
+        <add-disc></add-disc>
+    </div>
+</div>
+
+<div ng-bind="statusMsg"></div>
+
+<table class="highlighted centered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>תאריך</th>
+            <th>סיבת ההוצאה</th>
+            <th>מי חתום עליו</th>
+            <th>מספר סידורי</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="disc in discs">
+            <td><i class="fa fa-trash" ng-click="removeDisc(disc.id)"></i></td>
+            <td>{{disc.date}}</td>
+            <td>{{disc.reason}}</td>
+            <td>{{disc.name}}</td>
+            <td>{{disc.id}}</td>
+        </tr>
+    </tbody>
 </table>
