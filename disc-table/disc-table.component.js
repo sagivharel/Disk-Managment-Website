@@ -8,7 +8,6 @@ angular
                 $scope.type = type;
                 $http.get(`db-actions/get_discs.php?type=${type}`)
                     .then(function (response) {
-                        console.log(response.data);
                         $scope.discs = response.data.discs;
                     });
 
@@ -26,7 +25,7 @@ angular
                         }
                     });
                     request.then(function () {
-                        console.log("succeed")
+                        // actions after added successfully
                     });
                 }
             },
